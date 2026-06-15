@@ -4,6 +4,29 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+
+
+class UserCreate(BaseModel):
+    username: str
+    password: str
+
+
+class UserResponse(BaseModel):
+    id: int
+    username: str
+    disabled: bool
+
+    model_config = {"from_attributes": True}
+
+
 class DocumentBase(BaseModel):
     telegram_file_id: str
     original_filename: str

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, BigInteger, Text, Numeric, Date, DateTime, CheckConstraint, text
+from sqlalchemy import Column, BigInteger, Text, Numeric, Date, DateTime, CheckConstraint, text, Boolean
 from database import Base
 
 
@@ -15,6 +15,15 @@ class Document(Base):
     summary_text = Column(Text, nullable=True)
     summary_status = Column(Text, default="pending", nullable=False)
     notes = Column(Text, nullable=True)
+
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    username = Column(Text, unique=True, nullable=False)
+    password_hash = Column(Text, nullable=False)
+    disabled = Column(Boolean, default=False)
 
 
 class FinanceMovement(Base):
